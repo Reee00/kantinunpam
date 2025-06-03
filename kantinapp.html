@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Kantin Kampus - Design Prototype</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .screens-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .screen {
+            background: white;
+            border-radius: 20px;
+            padding: 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .screen:hover {
+            transform: translateY(-5px);
+        }
+
+        .screen-header {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 15px 20px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .screen-content {
+            padding: 20px;
+            height: 500px;
+            overflow-y: auto;
+        }
+
+        /* Login Screen Styles */
+        .login-screen {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40px 30px;
+        }
+
+        .login-logo {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .login-title {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .login-subtitle {
+            opacity: 0.8;
+            margin-bottom: 40px;
+            font-size: 1em;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1em;
+            background: rgba(255,255,255,0.9);
+            color: #333;
+        }
+
+        .input-field::placeholder {
+            color: #666;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s ease;
+        }
+
+        .login-btn:hover {
+            background: #45a049;
+        }
+
+        /* Home Screen Styles */
+        .greeting {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding: 15px;
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border-radius: 15px;
+        }
+
+        .greeting-icon {
+            font-size: 2em;
+            margin-right: 15px;
+        }
+
+        .greeting-text h2 {
+            color: #1976d2;
+            font-size: 1.3em;
+            margin-bottom: 5px;
+        }
+
+        .greeting-text p {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .time-selector {
+            margin-bottom: 25px;
+        }
+
+        .time-selector h3 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        .time-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .time-btn {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            background: white;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .time-btn.active {
+            background: #4CAF50;
+            color: white;
+            border-color: #4CAF50;
+        }
+
+        .popular-menu {
+            margin-bottom: 25px;
+        }
+
+        .popular-menu h3 {
+            margin-bottom: 15px;
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background: #e8f5e8;
+            transform: translateX(5px);
+        }
+
+        .menu-icon {
+            font-size: 2em;
+            margin-right: 15px;
+        }
+
+        .menu-info {
+            flex: 1;
+        }
+
+        .menu-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .menu-price {
+            color: #4CAF50;
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+
+        .stock-info {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 3px;
+        }
+
+        .view-all-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .view-all-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Menu Screen Styles */
+        .search-bar {
+            margin-bottom: 20px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1em;
+            background: #f8f9fa;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #4CAF50;
+            background: white;
+        }
+
+        .categories {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .category-btn {
+            padding: 10px 20px;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .category-btn.active {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .menu-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .menu-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .menu-card:hover {
+            border-color: #4CAF50;
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.15);
+        }
+
+        .menu-card-info {
+            flex: 1;
+        }
+
+        .add-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .add-btn:hover {
+            background: #45a049;
+        }
+
+        /* Cart Screen Styles */
+        .order-time {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .order-time h3 {
+            color: #4CAF50;
+            margin-bottom: 5px;
+        }
+
+        .order-time p {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .cart-items {
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .qty-btn {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #e0e0e0;
+            background: white;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .total-section {
+            border-top: 2px solid #e0e0e0;
+            padding-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .total-final {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #4CAF50;
+        }
+
+        .payment-section {
+            margin-bottom: 20px;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .payment-option.selected {
+            border-color: #4CAF50;
+            background: #e8f5e8;
+        }
+
+        .radio {
+            margin-right: 10px;
+        }
+
+        .order-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 12px;
+            font-size: 1.2em;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .order-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Design Notes */
+        .design-notes {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .design-notes h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .note-section {
+            margin-bottom: 25px;
+        }
+
+        .note-section h3 {
+            color: #4CAF50;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .note-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .note-section li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .note-section li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .color-palette {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .color-box {
+            width: 60px;
+            height: 60px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.8em;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏫 App Kantin Kampus</h1>
+            <p>Design Prototype berdasarkan Design Thinking Process</p>
+        </div>
+
+        <div class="screens-container">
+            <!-- Login Screen -->
+            <div class="screen">
+                <div class="screen-header">
+                    1. Login Screen
+                </div>
+                <div class="screen-content login-screen">
+                    <div class="login-logo">🏫</div>
+                    <h1 class="login-title">Kantin UNPAM</h1>
+                    <p class="login-subtitle">Pesan makanan tanpa antri panjang!</p>
+                    
+                    <div class="input-group">
+                        <label class="input-label">NIM (Nomor Induk Mahasiswa)</label>
+                        <input type="text" class="input-field" placeholder="Masukkan NIM kamu" maxlength="13">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label class="input-label">Nama Lengkap</label>
+                        <input type="text" class="input-field" placeholder="Masukkan nama lengkap">
+                    </div>
+                    
+                    <button class="login-btn">Masuk ke Kantin</button>
+                </div>
+            </div>
+
+            <!-- Home Screen -->
+            <div class="screen">
+                <div class="screen-header">
+                    2. Home Screen
+                </div>
+                <div class="screen-content">
+                    <div class="greeting">
+                        <div class="greeting-icon">👋</div>
+                        <div class="greeting-text">
+                            <h2>Hai, Budi!</h2>
+                            <p>Mau pesan apa hari ini?</p>
+                        </div>
+                    </div>
+
+                    <div class="time-selector">
+                        <h3>⏰ Pesan untuk:</h3>
+                        <div class="time-buttons">
+                            <div class="time-btn active">
+                                <div>Istirahat 1</div>
+                                <div style="font-size: 0.8em; opacity: 0.8;">10.00-10.30</div>
+                            </div>
+                            <div class="time-btn">
+                                <div>Istirahat 2</div>
+                                <div style="font-size: 0.8em; opacity: 0.8;">12.30-13.00</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="popular-menu">
+                        <h3>🔥 Menu Populer:</h3>
+                        
+                        <div class="menu-item">
+                            <div class="menu-icon">🍱</div>
+                            <div class="menu-info">
+                                <div class="menu-name">Nasi Gudeg</div>
+                                <div class="menu-price">Rp 8.000</div>
+                                <div class="stock-info">Stock: 15 porsi</div>
+                            </div>
+                        </div>
+
+                        <div class="menu-item">
+                            <div class="menu-icon">🧋</div>
+                            <div class="menu-info">
+                                <div class="menu-name">Es Teh Manis</div>
+                                <div class="menu-price">Rp 3.000</div>
+                                <div class="stock-info">Stock: 25 gelas</div>
+                            </div>
+                        </div>
+
+                        <div class="menu-item">
+                            <div class="menu-icon">🍞</div>
+                            <div class="menu-info">
+                                <div class="menu-name">Roti Bakar</div>
+                                <div class="menu-price">Rp 5.000</div>
+                                <div class="stock-info">Stock: 12 potong</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="view-all-btn">Lihat Semua Menu →</button>
+                </div>
+            </div>
+
+            <!-- Menu Screen -->
+            <div class="screen">
+                <div class="screen-header">
+                    3. Menu Lengkap
+                </div>
+                <div class="screen-content">
+                    <div class="search-bar">
+                        <input type="text" class="search-input" placeholder="🔍 Cari makanan...">
+                    </div>
+
+                    <div class="categories">
+                        <button class="category-btn active">🍚 Nasi & Lauk</button>
+                        <button class="category-btn">🥤 Minuman</button>
+                        <button class="category-btn">🍰 Cemilan</button>
+                    </div>
+
+                    <div class="menu-grid">
+                        <div class="menu-card">
+                            <div class="menu-card-info">
+                                <div class="menu-name">Nasi Gudeg</div>
+                                <div class="menu-price">Rp 8.000</div>
+                                <div class="stock-info">Stock: 15 porsi</div>
+                            </div>
+                            <button class="add-btn">+ Tambah</button>
+                        </div>
+
+                        <div class="menu-card">
+                            <div class="menu-card-info">
+                                <div class="menu-name">Nasi Pecel</div>
+                                <div class="menu-price">Rp 7.000</div>
+                                <div class="stock-info">Stock: 20 porsi</div>
+                            </div>
+                            <button class="add-btn">+ Tambah</button>
+                        </div>
+
+                        <div class="menu-card">
+                            <div class="menu-card-info">
+                                <div class="menu-name">Es Teh Manis</div>
+                                <div class="menu-price">Rp 3.000</div>
+                                <div class="stock-info">Stock: 25 gelas</div>
+                            </div>
+                            <button class="add-btn">+ Tambah</button>
+                        </div>
+
+                        <div class="menu-card">
+                            <div class="menu-card-info">
+                                <div class="menu-name">Es Jeruk</div>
+                                <div class="menu-price">Rp 4.000</div>
+                                <div class="stock-info">Stock: 18 gelas</div>
+                            </div>
+                            <button class="add-btn">+ Tambah</button>
+                        </div>
+
+                        <div class="menu-card">
+                            <div class="menu-card-info">
+                                <div class="menu-name">Roti Bakar</div>
+                                <div class="menu-price">Rp 5.000</div>
+                                <div class="stock-info">Stock: 12 potong</div>
+                            </div>
+                            <button class="add-btn">+ Tambah</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cart Screen -->
+            <div class="screen">
+                <div class="screen-header">
+                    4. Keranjang Pesanan
+                </div>
+                <div class="screen-content">
+                    <div class="order-time">
+                        <h3>Untuk: Istirahat 1</h3>
+                        <p>(10.00 - 10.30 WIB)</p>
+                    </div>
+
+                    <div class="cart-items">
+                        <div class="cart-item">
+                            <div>
+                                <div class="menu-name">Nasi Gudeg</div>
+                                <div style="color: #666; font-size: 0.9em;">Rp 8.000 x 1</div>
+                            </div>
+                            <div class="quantity-controls">
+                                <button class="qty-btn">-</button>
+                                <span>1</span>
+                                <button class="qty-btn">+</button>
+                            </div>
+                        </div>
+
+                        <div class="cart-item">
+                            <div>
+                                <div class="menu-name">Es Teh Manis</div>
+                                <div style="color: #666; font-size: 0.9em;">Rp 3.000 x 2</div>
+                            </div>
+                            <div class="quantity-controls">
+                                <button class="qty-btn">-</button>
+                                <span>2</span>
+                                <button class="qty-btn">+</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="total-section">
+                        <div class="total-row">
+                            <span>Subtotal:</span>
+                            <span>Rp 14.000</span>
+                        </div>
+                        <div class="total-row total-final">
+                            <span>Total:</span>
+                            <span>Rp 14.000</span>
+                        </div>
+                    </div>
+
+                    <div class="payment-section">
+                        <h3 style="margin-bottom: 15px;">Cara Bayar:</h3>
+                        <div class="payment-option selected">
+                            <input type="radio" class="radio" name="payment" checked>
+                            <div>
+                                <div style="font-weight: 600;">💵 Tunai di Kantin</div>
+                                <div style="font-size: 0.9em; color: #666;">Bayar saat ambil pesanan</div>
+                            </div>
+                        </div>
+                        <div class="payment-option">
+                            <input type="radio" class="radio" name="payment">
+                            <div>
+                                <div style="font-weight: 600;">💳 Transfer Digital</div>
+                                <div style="font-size: 0.9em; color: #666;">DANA, GoPay, OVO</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: #fff3cd; padding: 15px; border-radius: 8px; margin-bottom: 20px; font-size: 0.9em;">
+                        <strong>📍 Estimasi:</strong> Pesanan siap dalam 10 menit<br>
+                        <strong>📢 Info:</strong> Kamu akan dapat notifikasi saat pesanan siap
+                    </div>
+
+                    <button class="order-btn">🚀 PESAN SEKARANG</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Design Notes -->
+        <div class="design-notes">
+            <h2>📝 Penjelasan Design Decisions</h2>
+            
+            <div class="note-section">
+                <h3>🎨 Color Palette</h3>
+                <div class="color-palette">
+                    <div class="color-box" style="background: #4CAF50;">Primary<br>#4CAF50</div>
+                    <div class="color-box" style="background: #667eea;">Gradient 1<br>#667eea</div>
+                    <div class="color-box" style="background: #764ba2;">Gradient 2<br>#764ba2</div>
+                    <div class="color-box" style="background: #f8f9fa; color: #333;">Background<br>#f8f9fa</div>
+                </div>
+                <p><strong>Mengapa hijau?</strong> Warna hijau identik dengan fresh, sehat, dan makanan. Cocok untuk aplikasi kantin Kampus yang ingin mempromosikan makanan sehat.</p>
+            </div>
+
+            <div class="note-section">
+                <h3>🔐 Login Screen Design</h3>
+                <ul>
+                    <li><strong>NIM sebagai identifier:</strong> Lebih aman dan unik dibanding nama atau nomor HP</li>
+                    <li><strong>Gradient background:</strong> Memberikan kesan modern dan menarik untuk remaja</li>
+                    <li><strong>Icon Kampus besar:</strong> Membangun brand recognition</li>
+                    <li><strong>Input field yang besar:</strong> Mudah diakses di mobile device</li>
+                    <li><strong>Tagline "tanpa antri panjang":</strong> Langsung komunikasikan value proposition</li>
+                </ul>
+            </div>
+
+            <div class="note-section">
+                <h3>🏠 Home Screen Design</h3>
+                <ul>
+                    <li><strong>Personal greeting:</strong> Membuat user merasa welcome dan dikenal</li>
+                    <li><strong>Time selector prominent:</strong> Solve masalah utama "makanan habis"</li>
+                    <li><strong>Menu populer dengan emoji:</strong> Visual appeal untuk remaja + quick access</li>
+                    <li><strong>Stock information:</strong> Transparansi stock = less disappointment</li>
+                    <li><strong>Large touch targets:</strong> Mudah di-tap saat terburu-buru</li>
+                </ul>
+            </div>
+
+            <div class="note-section">
+                <h3>📋 Menu Screen Design</h3>
+                <ul>
+                    <li><strong>Search bar di atas:</strong> Untuk user yang sudah tau mau pesan apa</li>
+                    <li><strong>Category tabs:</strong> Filtering sederhana, tidak overwhelming</li>
+                    <li><strong>Card layout:</strong> Scannable, mudah dibaca cepat</li>
+                    <li><strong>Stock info di setiap item:</strong> Membantu decision making</li>
+                    <li><strong>Clear CTA button:</strong> "Tambah" langsung actionable</li>
+                </ul>
+            </div>
+
+            <div class="note-section">
+                <h3>🛒 Cart Screen Design</h3>
+                <ul>
+                    <li><strong>Order time confirmation:</strong> Double-check untuk avoid confusion</li>
+                    <li><strong>Quantity controls:</strong> Easy adjustment tanpa re-navigate</li>
+                    <li><strong>Clear pricing breakdown:</strong> No hidden costs, transparent</li>
+                    <li><strong>Payment method default:</strong> "Tunai di kantin" = most familiar</li>
+                    <li><strong>Estimation info:</strong> Set proper expectations</li>
+                    <li><strong>Big CTA button:</strong> Confidence in final action</li>
+                </ul>
+            </div>
+
+            <div class="note-section">
+                <h3>📱 Mobile-First Principles</h3>
+                <ul>
+                    <li><strong>Touch-friendly:</strong> Minimum 44px touch targets</li>
+                    <li><strong>Thumb-zone friendly:</strong> Important buttons di bottom area</li>
+                    <li><strong>Readable fonts:</strong> Minimum 16px untuk body text</li>
+                    <li><strong>Loading considerations:</strong> Minimal images untuk speed</li>
+                    <li><strong>Offline capability:</strong> Cache menu data untuk poor connection</li>
+                </ul>
+            </div>
+
+            <div class="note-section">
+                <h3>🎯 User Experience Decisions</h3>
+                <ul>
+                    <li><strong>Maximum 3 screens untuk checkout:</strong> Sesuai 30-menit time constraint</li>
+                    <li><strong>No account creation:</strong> Friction reduction, login dengan NIK cukup</li>
+                    <li><strong>Stock transparency:</strong> Manage expectations, reduce complaints</li>
+                    <li><strong>Time-based ordering:</strong> Solve peak hour rush problem</li>
+                    <li><strong>Simple payment:</strong> Cash = no digital payment barrier</li>
+                    <li><strong>Clear feedback:</strong> Every action has clear next step</li>
+                </ul>
+            </div>
+
+            <div class="note-section">
+                <h3>🔧 Technical Considerations</h3>
+                <ul>
+                    <li><strong>Real-time stock sync:</strong> Prevent overselling</li>
+                    <li><strong>Push notifications:</strong> Alert when order ready</li>
+                    <li><strong>Simple backend:</strong> Menu management for kantin staff</li>
+                    <li><strong>Analytics tracking:</strong> Monitor popular items, peak times</li>
+                    <li><strong>Caching strategy:</strong> Menu data cached untuk speed</li>
+                    <li><strong>Error handling:</strong> Graceful failures dengan fallback options</li>
+                    <li><strong>Data validation:</strong> NIK format validation, proper input sanitization</li>
+                </ul>
+            </div>
+
+            <div class="note-section">
+                <h3>🧪 Testing & Validation</h3>
+                <ul>
+                    <li><strong>A/B test login flow:</strong> NIK vs phone number conversion rates</li>
+                    <li><strong>Usability testing:</strong> 5 students complete full flow in < 3 minutes</li>
+                    <li><strong>Stress testing:</strong> Handle 100 concurrent orders during break time</li>
+                    <li><strong>Accessibility testing:</strong> Screen reader compatibility, color contrast</li>
+                    <li><strong>Performance testing:</strong> Load time < 2 seconds on 3G</li>
+                </ul>
+            </div>
+
+            <div class="note-section">
+                <h3>📊 Success Metrics</h3>
+                <ul>
+                    <li><strong>Adoption rate:</strong> 70% of students download app (210/300)</li>
+                    <li><strong>Retention rate:</strong> 50% active users after 1 week</li>
+                    <li><strong>Order completion time:</strong> Average < 3 minutes</li>
+                    <li><strong>Customer satisfaction:</strong> 80% reduction in canteen complaints</li>
+                    <li><strong>Operational efficiency:</strong> 30% faster service during peak hours</li>
+                </ul>
+            </div>
+
+            <div class="note-section">
+                <h3>🚀 Future Enhancements</h3>
+                <ul>
+                    <li><strong>Group ordering:</strong> Order for friends (max 3 people)</li>
+                    <li><strong>Favorite items:</strong> Quick reorder from history</li>
+                    <li><strong>Nutrition info:</strong> Calorie and ingredient information</li>
+                    <li><strong>Pre-order scheduling:</strong> Order tomorrow's lunch today</li>
+                    <li><strong>Loyalty program:</strong> Points for frequent customers</li>
+                    <li><strong>Feedback system:</strong> Rate food quality and service</li>
+                </ul>
+            </div>
+
+            <div class="note-section">
+                <h3>⚠️ Design Constraints & Solutions</h3>
+                <ul>
+                    <li><strong>Limited break time (30 min):</strong> Simplified 3-screen flow</li>
+                    <li><strong>Weak school WiFi:</strong> Lightweight design, offline capabilities</li>
+                    <li><strong>Mixed tech literacy:</strong> Intuitive icons, minimal text</li>
+                    <li><strong>Budget constraints:</strong> No complex payment integration initially</li>
+                    <li><strong>Staff training needed:</strong> Simple admin panel for canteen workers</li>
+                </ul>
+            </div>
+
+            <div class="note-section">
+                <h3>🎨 Visual Design Rationale</h3>
+                <ul>
+                    <li><strong>Card-based layout:</strong> Familiar pattern from social media apps</li>
+                    <li><strong>Emoji usage:</strong> Universal language, adds personality</li>
+                    <li><strong>Rounded corners:</strong> Friendly, approachable aesthetic</li>
+                    <li><strong>Whitespace usage:</strong> Reduces cognitive load, improves readability</li>
+                    <li><strong>Consistent spacing:</strong> 8px grid system for visual harmony</li>
+                    <li><strong>Shadow usage:</strong> Subtle depth, modern material design</li>
+                </ul>
+            </div>
+
+            <div class="note-section">
+                <h3>📲 Interaction Design</h3>
+                <ul>
+                    <li><strong>Micro-animations:</strong> Button hover states, loading indicators</li>
+                    <li><strong>Haptic feedback:</strong> Subtle vibration on important actions</li>
+                    <li><strong>Swipe gestures:</strong> Swipe to remove from cart</li>
+                    <li><strong>Pull to refresh:</strong> Update menu and stock information</li>
+                    <li><strong>Smart defaults:</strong> Most popular time slot pre-selected</li>
+                </ul>
+            </div>
+
+            <div class="note-section">
+                <h3>🔍 Information Architecture</h3>
+                <ul>
+                    <li><strong>Flat navigation:</strong> Maximum 2 levels deep</li>
+                    <li><strong>Progressive disclosure:</strong> Show essential info first</li>
+                    <li><strong>Contextual information:</strong> Stock info when relevant</li>
+                    <li><strong>Clear hierarchy:</strong> Visual weight guides attention</li>
+                    <li><strong>Breadcrumbs avoided:</strong> Back button sufficient for mobile</li>
+                </ul>
+            </div>
+
+            <div class="note-section">
+                <h3>💡 Key Innovation Points</h3>
+                <ul>
+                    <li><strong>Time-slot ordering:</strong> Prevents food shortage disappointment</li>
+                    <li><strong>Real-time stock display:</strong> Transparency builds trust</li>
+                    <li><strong>NIM-based login:</strong> No password to remember, secure</li>
+                    <li><strong>Hybrid payment:</strong> Digital order, cash payment (transition strategy)</li>
+                    <li><strong>Context-aware design:</strong> School break time constraints addressed</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Implementation Guide -->
+        <div class="design-notes" style="margin-top: 30px;">
+            <h2>🛠️ Implementation Guidelines</h2>
+            
+            <div class="note-section">
+                <h3>🏗️ Development Phases</h3>
+                <h4>Phase 1 - MVP (4 weeks)</h4>
+                <ul>
+                    <li>Basic login with NIM validation</li>
+                    <li>Menu display with static data</li>
+                    <li>Simple cart functionality</li>
+                    <li>Cash payment option only</li>
+                </ul>
+                
+                <h4>Phase 2 - Core Features (6 weeks)</h4>
+                <ul>
+                    <li>Real-time stock management</li>
+                    <li>Time-slot ordering system</li>
+                    <li>Push notifications</li>
+                    <li>Basic admin panel for canteen staff</li>
+                </ul>
+                
+                <h4>Phase 3 - Enhancements (4 weeks)</h4>
+                <ul>
+                    <li>Digital payment integration</li>
+                    <li>Order history and favorites</li>
+                    <li>Analytics dashboard</li>
+                    <li>Performance optimizations</li>
+                </ul>
+            </div>
+
+            <div class="note-section">
+                <h3>🎯 Prototype Testing Plan</h3>
+                <h4>Week 1: Internal Testing</h4>
+                <ul>
+                    <li>Design team walkthrough</li>
+                    <li>Technical feasibility validation</li>
+                    <li>Basic functionality testing</li>
+                </ul>
+                
+                <h4>Week 2: User Testing</h4>
+                <ul>
+                    <li>5 students from different grades</li>
+                    <li>Task: Complete full order in 3 minutes</li>
+                    <li>Observe pain points and confusion</li>
+                </ul>
+                
+                <h4>Week 3: Stakeholder Review</h4>
+                <ul>
+                    <li>Present to school principal</li>
+                    <li>Get canteen staff feedback</li>
+                    <li>Validate business requirements</li>
+                </ul>
+            </div>
+
+            <div class="note-section">
+                <h3>📋 Design System Components</h3>
+                <h4>Typography Scale</h4>
+                <ul>
+                    <li>H1: 24px (Screen titles)</li>
+                    <li>H2: 20px (Section headers)</li>
+                    <li>H3: 18px (Subsections)</li>
+                    <li>Body: 16px (Main content)</li>
+                    <li>Caption: 14px (Secondary info)</li>
+                </ul>
+                
+                <h4>Spacing System</h4>
+                <ul>
+                    <li>XS: 4px (Icon margins)</li>
+                    <li>S: 8px (Component spacing)</li>
+                    <li>M: 16px (Section spacing)</li>
+                    <li>L: 24px (Screen margins)</li>
+                    <li>XL: 32px (Major sections)</li>
+                </ul>
+            </div>
+
+            <div class="note-section">
+                <h3>🎨 Component Library</h3>
+                <h4>Buttons</h4>
+                <ul>
+                    <li>Primary: Green gradient, white text</li>
+                    <li>Secondary: White background, green border</li>
+                    <li>Ghost: Transparent, green text</li>
+                    <li>Disabled: Gray background, gray text</li>
+                </ul>
+                
+                <h4>Cards</h4>
+                <ul>
+                    <li>Menu card: White background, subtle shadow</li>
+                    <li>Info card: Light green background</li>
+                    <li>Warning card: Light yellow background</li>
+                </ul>
+            </div>
+
+            <div class="note-section">
+                <h3>📱 Responsive Considerations</h3>
+                <ul>
+                    <li><strong>iPhone SE (375px):</strong> Minimum supported width</li>
+                    <li><strong>Standard phones (414px):</strong> Optimal experience</li>
+                    <li><strong>Large phones (480px+):</strong> Enhanced spacing</li>
+                    <li><strong>Tablet (768px+):</strong> Two-column layout for menu</li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div style="text-align: center; margin-top: 40px; color: white; opacity: 0.8;">
+            <p>Design berdasarkan Design Thinking methodology untuk kampus Indonesia</p>
+            <p>Focus: Menyelesaikan masalah antrian kantin dengan solusi digital yang realistis</p>
+        </div>
+    </div>
+
+    <script>
+        // Simple interaction for demo purposes
+        document.addEventListener('DOMContentLoaded', function() {
+            // Time selector interaction
+            const timeButtons = document.querySelectorAll('.time-btn');
+            timeButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    timeButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Category selector interaction
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            categoryButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    categoryButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // Payment option interaction
+            const paymentOptions = document.querySelectorAll('.payment-option');
+            paymentOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    paymentOptions.forEach(o => o.classList.remove('selected'));
+                    this.classList.add('selected');
+                    const radio = this.querySelector('input[type="radio"]');
+                    radio.checked = true;
+                });
+            });
+
+            // Add button interactions
+            const addButtons = document.querySelectorAll('.add-btn');
+            addButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.style.background = '#45a049';
+                    this.textContent = '✓ Ditambah';
+                    setTimeout(() => {
+                        this.style.background = '#4CAF50';
+                        this.textContent = '+ Tambah';
+                    }, 1000);
+                });
+            });
+
+            // Quantity controls
+            const qtyButtons = document.querySelectorAll('.qty-btn');
+            qtyButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const span = this.parentNode.querySelector('span');
+                    let qty = parseInt(span.textContent);
+                    
+                    if (this.textContent === '+') {
+                        qty++;
+                    } else if (this.textContent === '-' && qty > 1) {
+                        qty--;
+                    }
+                    
+                    span.textContent = qty;
+                    
+                    // Update total (simplified demo)
+                    // In real app, this would calculate actual totals
+                });
+            });
+
+            // Login form validation
+            const loginBtn = document.querySelector('.login-btn');
+            const NIMInput = document.querySelector('input[placeholder="Masukkan NIM kamu"]');
+            const namaInput = document.querySelector('input[placeholder="Masukkan nama lengkap"]');
+
+            if (loginBtn) {
+                loginBtn.addEventListener('click', function() {
+                    const NIM = NIMInput.value;
+                    const nama = namaInput.value;
+                    
+                    if (!NIM || NIM.length !== 13) {
+                        alert('NIM harus 13 digit!');
+                        return;
+                    }
+                    
+                    if (!nama) {
+                        alert('Nama tidak boleh kosong!');
+                        return;
+                    }
+                    
+                    this.textContent = '✓ Berhasil Masuk';
+                    this.style.background = '#45a049';
+                });
+            }
+        });
+    </script>
+</body>
+</html>
